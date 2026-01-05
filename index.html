@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Graphic Designer | xinnoxCreatives</title>
+    
+    <link rel="icon" type="image/png" href="img/01.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- RESET & VARIABLES --- */
+        :root {
+            --bg-color: #0d0d0d;
+            --text-color: #ffffff;
+            --accent-purple: #704AF2;
+            --accent-lime: #D9F248;
+            --accent-orange: #FF5C00;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'Manrope', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+
+        /* --- BACKGROUND GRADIENT BLOBS --- */
+        .bg-blob {
+            position: absolute; border-radius: 50%; filter: blur(80px);
+            z-index: -1; opacity: 0.4; animation: float 10s infinite alternate;
+        }
+        .blob-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; left: -100px; }
+        .blob-2 { width: 300px; height: 300px; background: var(--accent-orange); bottom: 10%; right: -50px; animation-delay: 2s; }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 50px); } }
+
+        /* --- NAVIGATION --- */
+        nav {
+            padding: 30px 60px; display: flex; justify-content: space-between;
+            align-items: center; font-family: var(--font-display);
+            position: sticky; top: 0; background: rgba(13,13,13,0.8); backdrop-filter: blur(10px); z-index: 1000;
+        }
+        .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; }
+        .nav-items { display: flex; gap: 40px; }
+        .nav-items a { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; position: relative; }
+        .nav-items a:hover { color: var(--accent-lime); }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center; padding: 0 20px;
+        }
+        .hero h1 {
+            font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem);
+            line-height: 0.9; font-weight: 800; text-transform: uppercase;
+        }
+        .hero h1 span { color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.5); display: block; }
+        .btn {
+            display: inline-block; padding: 15px 40px; background: white; color: black;
+            border-radius: 50px; font-weight: 700; font-family: var(--font-display);
+            text-transform: uppercase; margin-top: 20px;
+        }
+        .btn:hover { transform: scale(1.05); background: var(--accent-lime); }
+
+        /* --- PORTFOLIO FILTER --- */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .filter-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid #333;
+            padding: 10px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: var(--font-display);
+            text-transform: uppercase;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--accent-lime);
+            color: black;
+            border-color: var(--accent-lime);
+        }
+
+        /* --- PORTFOLIO GRID --- */
+        .portfolio { padding: 100px 60px; }
+        .section-header { margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .section-header h2 { font-family: var(--font-display); font-size: 3rem; text-transform: uppercase; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; min-height: 400px; }
+        
+        .card { 
+            background-color: #1a1a1a; border-radius: 20px; overflow: hidden; transition: 0.4s; cursor: pointer;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .card-img { height: 400px; width: 100%; background-size: cover; background-position: center; transition: 0.5s; }
+        .card:hover .card-img { transform: scale(1.05); }
+        .card-info { padding: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .tag { border: 1px solid #555; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; color: var(--accent-lime); }
+
+        /* --- LIGHTBOX --- */
+        .lightbox {
+            display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
+        }
+        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 10px; box-shadow: 0 0 30px var(--accent-lime); }
+        .close-lightbox { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; cursor: pointer; }
+
+        /* --- ABOUT & CONTACT --- */
+        .about-section { padding: 100px 60px; display: flex; gap: 50px; align-items: center; background: #080808; }
+        .about-img { flex: 1; border-radius: 20px; overflow: hidden; height: 500px; }
+        .about-img img { width: 100%; height: 100%; object-fit: cover; }
+        .about-content { flex: 1; }
+        .about-content h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; }
+        
+        .contact-btns { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin-top: 30px; }
+        .contact-link { padding: 20px; border-radius: 10px; text-align: center; font-weight: 800; font-family: var(--font-display); text-transform: uppercase; }
+        .wa { background: #25D366; color: white; }
+        .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .about-section { flex-direction: column; padding: 50px 20px; }
+            .nav-items { display: none; }
+            .hero h1 { font-size: 3.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+
+    <nav>
+        <div class="logo">xinnoxCreatives</div>
+        <div class="nav-items">
+            <a href="index.html">Home</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </nav>
+    <section class="hero">
+        <h1>I'm a <br><span>Graphics Designer</span></h1>
+        <p>Packaging • Flyers • Social Media Graphics</p>
+        <a href="portfolio.html" class="btn">View Portfolio</a>
+    </section>
+</body>
+<footer>
+        <p style="padding: 20px; text-align: center; color: #555;">&copy; 2026 Graphic Design Portfolio.</p>
+    </footer>
+</html>
