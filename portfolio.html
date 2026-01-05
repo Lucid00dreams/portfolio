@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graphic Designer | xinnoxCreatives</title>
+    <title>Portfolio | xinnoxCreatives</title>
     
     <link rel="icon" type="image/png" href="img/01.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
-        /* --- RESET & VARIABLES --- */
         :root {
             --bg-color: #0d0d0d;
             --text-color: #ffffff;
@@ -21,126 +20,53 @@
             --accent-orange: #FF5C00;
             --font-display: 'Syne', sans-serif;
             --font-body: 'Manrope', sans-serif;
+            --nav-height: 80px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-body);
-            overflow-x: hidden;
-            line-height: 1.5;
-        }
-
+        body { background-color: var(--bg-color); color: var(--text-color); font-family: var(--font-body); overflow-x: hidden; line-height: 1.5; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
 
-        /* --- BACKGROUND GRADIENT BLOBS --- */
-        .bg-blob {
-            position: absolute; border-radius: 50%; filter: blur(80px);
-            z-index: -1; opacity: 0.4; animation: float 10s infinite alternate;
-        }
-        .blob-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; left: -100px; }
-        .blob-2 { width: 300px; height: 300px; background: var(--accent-orange); bottom: 10%; right: -50px; animation-delay: 2s; }
-        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 50px); } }
+        /* Background Blobs */
+        .bg-blob { position: absolute; border-radius: 50%; filter: blur(60px); z-index: -1; opacity: 0.2; animation: float 10s infinite alternate; }
+        .blob-1 { width: 300px; height: 300px; background: var(--accent-purple); top: -50px; left: -50px; }
+        .blob-2 { width: 250px; height: 250px; background: var(--accent-orange); bottom: 10%; right: -30px; }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(20px, 30px); } }
 
-        /* --- NAVIGATION --- */
-        nav {
-            padding: 30px 60px; display: flex; justify-content: space-between;
-            align-items: center; font-family: var(--font-display);
-            position: sticky; top: 0; background: rgba(13,13,13,0.8); backdrop-filter: blur(10px); z-index: 1000;
-        }
-        .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; }
-        .nav-items { display: flex; gap: 40px; }
-        .nav-items a { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; position: relative; }
-        .nav-items a:hover { color: var(--accent-lime); }
+        /* Navigation */
+        nav { height: var(--nav-height); padding: 0 clamp(20px, 5vw, 60px); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); position: sticky; top: 0; background: rgba(13,13,13,0.8); backdrop-filter: blur(15px); z-index: 2000; }
+        .logo { font-size: 1.3rem; font-weight: 800; text-transform: uppercase; z-index: 2100; }
+        .nav-items { display: flex; gap: 30px; }
+        .nav-items a { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
+        .nav-items a:hover, .nav-items a.active { color: var(--accent-lime); }
+        .menu-toggle { display: none; cursor: pointer; z-index: 2100; font-size: 1.5rem; }
 
-        /* --- HERO SECTION --- */
-        .hero {
-            height: 90vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center; padding: 0 20px;
-        }
-        .hero h1 {
-            font-family: var(--font-display); font-size: clamp(3rem, 10vw, 8rem);
-            line-height: 0.9; font-weight: 800; text-transform: uppercase;
-        }
-        .hero h1 span { color: transparent; -webkit-text-stroke: 2px rgba(255,255,255,0.5); display: block; }
-        .btn {
-            display: inline-block; padding: 15px 40px; background: white; color: black;
-            border-radius: 50px; font-weight: 700; font-family: var(--font-display);
-            text-transform: uppercase; margin-top: 20px;
-        }
-        .btn:hover { transform: scale(1.05); background: var(--accent-lime); }
+        /* Portfolio */
+        .portfolio { padding: 40px clamp(20px, 5vw, 60px); min-height: 80vh; }
+        .section-header { margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .section-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); text-transform: uppercase; }
 
-        /* --- PORTFOLIO FILTER --- */
-        .filter-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-        .filter-btn {
-            background: transparent;
-            color: white;
-            border: 1px solid #333;
-            padding: 10px 25px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-family: var(--font-display);
-            text-transform: uppercase;
-            font-weight: 700;
-            transition: 0.3s;
-        }
-        .filter-btn.active, .filter-btn:hover {
-            background: var(--accent-lime);
-            color: black;
-            border-color: var(--accent-lime);
-        }
+        .filter-container { display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap; }
+        .filter-btn { background: #1a1a1a; color: white; border: 1px solid #333; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: var(--font-display); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; transition: 0.3s; }
+        .filter-btn.active { background: var(--accent-lime); color: black; border-color: var(--accent-lime); }
 
-        /* --- PORTFOLIO GRID --- */
-        .portfolio { padding: 100px 60px; }
-        .section-header { margin-bottom: 40px; border-bottom: 1px solid #333; padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .section-header h2 { font-family: var(--font-display); font-size: 3rem; text-transform: uppercase; }
-        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; min-height: 400px; }
-        
-        .card { 
-            background-color: #1a1a1a; border-radius: 20px; overflow: hidden; transition: 0.4s; cursor: pointer;
-            animation: fadeIn 0.5s ease forwards;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr)); gap: 30px; }
+        .card { background-color: #141414; border-radius: 15px; overflow: hidden; transition: 0.4s ease; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
+        .card:hover { transform: translateY(-8px); border-color: var(--accent-lime); }
+        .card-img { aspect-ratio: 1/1; width: 100%; background-size: cover; background-position: center; }
+        .card-info { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .tag { border: 1px solid #444; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; color: var(--accent-lime); text-transform: uppercase; }
 
-        .card-img { height: 400px; width: 100%; background-size: cover; background-position: center; transition: 0.5s; }
-        .card:hover .card-img { transform: scale(1.05); }
-        .card-info { padding: 25px; display: flex; justify-content: space-between; align-items: center; }
-        .tag { border: 1px solid #555; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; text-transform: uppercase; color: var(--accent-lime); }
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; z-index: 3000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; padding: 20px; }
+        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+        .close-lightbox { position: absolute; top: 20px; right: 25px; color: white; font-size: 35px; cursor: pointer; }
 
-        /* --- LIGHTBOX --- */
-        .lightbox {
-            display: none; position: fixed; z-index: 2000; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
-        }
-        .lightbox img { max-width: 90%; max-height: 80%; border-radius: 10px; box-shadow: 0 0 30px var(--accent-lime); }
-        .close-lightbox { position: absolute; top: 30px; right: 40px; color: white; font-size: 40px; cursor: pointer; }
-
-        /* --- ABOUT & CONTACT --- */
-        .about-section { padding: 100px 60px; display: flex; gap: 50px; align-items: center; background: #080808; }
-        .about-img { flex: 1; border-radius: 20px; overflow: hidden; height: 500px; }
-        .about-img img { width: 100%; height: 100%; object-fit: cover; }
-        .about-content { flex: 1; }
-        .about-content h2 { font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; }
-        
-        .contact-btns { display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin-top: 30px; }
-        .contact-link { padding: 20px; border-radius: 10px; text-align: center; font-weight: 800; font-family: var(--font-display); text-transform: uppercase; }
-        .wa { background: #25D366; color: white; }
-        .ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-
-        @media (max-width: 768px) {
-            .grid { grid-template-columns: 1fr; }
-            .about-section { flex-direction: column; padding: 50px 20px; }
-            .nav-items { display: none; }
-            .hero h1 { font-size: 3.5rem; }
+        @media (max-width: 850px) {
+            .menu-toggle { display: block; }
+            .nav-items { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: #0d0d0d; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; }
+            .nav-items.active { right: 0; }
         }
     </style>
 </head>
@@ -151,24 +77,25 @@
 
     <nav>
         <div class="logo">xinnoxCreatives</div>
-        <div class="nav-items">
+        <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
+        <div class="nav-items" id="nav-list">
             <a href="index.html">Home</a>
-            <a href="portfolio.html">Portfolio</a>
+            <a href="portfolio.html" class="active">Portfolio</a>
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </div>
     </nav>
 
-    <section class="portfolio" id="portfolio">
+    <section class="portfolio">
         <div class="section-header">
             <h2>Portfolio</h2>
-            <p>2024 - 2026</p>
+            <p style="color: #666;">2024 - 2026</p>
         </div>
 
         <div class="filter-container">
-            <button class="filter-btn active" onclick="filterSelection('packaging')">Packaging</button>
-            <button class="filter-btn" onclick="filterSelection('flyers')">Flyers</button>
-            <button class="filter-btn" onclick="filterSelection('social')">Social Media</button>
+            <button class="filter-btn active" onclick="filterSelection('packaging', this)">Packaging</button>
+            <button class="filter-btn" onclick="filterSelection('flyers', this)">Flyers</button>
+            <button class="filter-btn" onclick="filterSelection('social', this)">Social Media</button>
         </div>
 
         <div class="grid" id="auto-portfolio-grid"></div>
@@ -179,97 +106,79 @@
         <img src="" id="lightbox-img">
     </div>
 
-   <script>
-    const grid = document.getElementById('auto-portfolio-grid');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = document.querySelector('.close-lightbox');
+    <script>
+        // MOBILE MENU LOGIC
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        menuToggle.onclick = () => {
+            navList.classList.toggle('active');
+            menuToggle.querySelector('i').classList.toggle('fa-bars');
+            menuToggle.querySelector('i').classList.toggle('fa-xmark');
+        };
 
-    // --- CONFIGURE YOUR FOLDERS HERE ---
-    const portfolioData = {
-        packaging: { folder: 'packaging', count: 40, label: 'Packaging' },
-        flyers: { folder: 'flyers', count: 40, label: 'Flyer Design' },
-        social: { folder: 'social', count: 40, label: 'Social Media' }
-    };
+        // PORTFOLIO LOGIC
+        const grid = document.getElementById('auto-portfolio-grid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
 
-    function renderGrid(filter) {
-        grid.innerHTML = ''; // Clear current images
+        const portfolioData = {
+            packaging: { folder: 'packaging', count: 7, label: 'Packaging' }, 
+            flyers: { folder: 'flyers', count: 15, label: 'Flyers' }, // Adjust counts as needed
+            social: { folder: 'social', count: 10, label: 'Social Media' }
+        };
 
-        const cat = portfolioData[filter];
-        
-        for (let i = 1; i <= cat.count; i++) {
-            let fileName = i < 10 ? '0' + i : i;
-            
-            // Paths for checking
-            const basePath = `img/${cat.folder}/${fileName}`;
-            const jpgPath = `${basePath}.jpg`;
-            const pngPath = `${basePath}.png`;
+        function renderGrid(category) {
+            grid.innerHTML = '';
+            const config = portfolioData[category];
 
-            // Create a temporary image to check if the file exists
-            const imgChecker = new Image();
-            imgChecker.src = jpgPath;
-
-            imgChecker.onload = function() {
-                createCard(jpgPath, fileName, cat.label);
-            };
-
-            imgChecker.onerror = function() {
-                // If JPG fails, try PNG
-                const pngChecker = new Image();
-                pngChecker.src = pngPath;
+            for (let i = 1; i <= config.count; i++) {
+                const fileName = i < 10 ? '0' + i : i;
+                const base = `img/${config.folder}/${fileName}`;
                 
-                pngChecker.onload = function() {
-                    createCard(pngPath, fileName, cat.label);
-                };
-                // If both fail, no card is created (no empty tiles!)
+                // This checks JPG then PNG
+                checkImageExists(`${base}.jpg`, config.label, fileName, () => {
+                    checkImageExists(`${base}.png`, config.label, fileName);
+                });
+            }
+        }
+
+        function checkImageExists(url, label, num, fallback) {
+            const img = new Image();
+            img.onload = () => createCard(url, label, num);
+            img.onerror = () => { if(fallback) fallback(); };
+            img.src = url;
+        }
+
+        function createCard(url, label, num) {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <div class="card-img" style="background-image: url('${url}')"></div>
+                <div class="card-info">
+                    <h3>Project ${num}</h3>
+                    <span class="tag">${label}</span>
+                </div>
+            `;
+            card.onclick = () => {
+                lightboxImg.src = url;
+                lightbox.style.display = 'flex';
             };
+            grid.appendChild(card);
         }
-    }
 
-    // Helper function to build the card only when image is found
-    function createCard(validPath, fileName, label) {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.innerHTML = `
-            <div class="card-img" style="background-image: url('${validPath}');"></div>
-            <div class="card-info">
-                <h3>Project ${fileName}</h3>
-                <span class="tag">${label}</span>
-            </div>
-        `;
-        card.onclick = () => openLightbox(validPath);
-        grid.appendChild(card);
-    }
-
-    function openLightbox(path) {
-        lightboxImg.src = path;
-        lightbox.style.display = 'flex';
-    }
-
-    function filterSelection(category) {
-        const btns = document.querySelectorAll('.filter-btn');
-        btns.forEach(btn => btn.classList.remove('active'));
-        
-        // Highlights the clicked button
-        if (event) {
-            event.currentTarget.classList.add('active');
+        function filterSelection(category, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGrid(category);
         }
-        
-        renderGrid(category);
-    }
 
-    // Default load: Shows Packaging images immediately
-    window.onload = () => {
-        renderGrid('packaging');
-    };
+        // Initialize
+        window.onload = () => renderGrid('packaging');
+        lightbox.onclick = () => lightbox.style.display = 'none';
+    </script>
 
-    // Lightbox close logic
-    closeBtn.onclick = () => lightbox.style.display = 'none';
-    lightbox.onclick = (e) => { if(e.target !== lightboxImg) lightbox.style.display = 'none'; }
-</script>
- <footer>
-        <p style="padding: 20px; text-align: center; color: #555;">&copy; 2026 Graphic Design Portfolio.</p>
+    <footer>
+        <p style="padding: 40px; text-align: center; color: #444; font-size: 0.8rem;">&copy; 2026 xinnoxCreatives.</p>
     </footer>
-
 </body>
 </html>

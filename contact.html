@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Graphic Designer | xinnoxCreatives</title>
+    <title>Contact | xinnoxCreatives</title>
 
     <link rel="icon" type="image/png" href="img/01.png">
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
@@ -22,6 +21,7 @@
             --accent-orange: #FF5C00;
             --font-display: 'Syne', sans-serif;
             --font-body: 'Manrope', sans-serif;
+            --nav-height: 80px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -39,31 +39,37 @@
 
         /* --- BACKGROUND GRADIENT BLOBS --- */
         .bg-blob {
-            position: absolute; border-radius: 50%; filter: blur(80px);
+            position: absolute; border-radius: 50%; filter: blur(60px);
             z-index: -1; opacity: 0.3; animation: float 10s infinite alternate;
         }
-        .blob-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; left: -100px; }
+        .blob-1 { width: clamp(200px, 40vw, 400px); height: clamp(200px, 40vw, 400px); background: var(--accent-purple); top: -50px; left: -50px; }
         .blob-2 { width: 300px; height: 300px; background: var(--accent-orange); bottom: 10%; right: -50px; }
-        .blob-3 { width: 350px; height: 350px; background: var(--accent-purple); top: 20%; right: 10%; opacity: 0.2; }
+        .blob-3 { width: 350px; height: 350px; background: var(--accent-purple); top: 20%; right: 10%; opacity: 0.15; }
         
-        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(30px, 50px); } }
+        @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(25px, 40px); } }
 
         /* --- NAVIGATION --- */
         nav {
-            padding: 30px 60px; display: flex; justify-content: space-between;
+            height: var(--nav-height);
+            padding: 0 clamp(20px, 5vw, 60px); 
+            display: flex; justify-content: space-between;
             align-items: center; font-family: var(--font-display);
-            position: sticky; top: 0; background: rgba(13,13,13,0.8); backdrop-filter: blur(10px); z-index: 1000;
+            position: sticky; top: 0; background: rgba(13,13,13,0.8); 
+            backdrop-filter: blur(15px); z-index: 2000;
         }
-        .logo { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; }
+        .logo { font-size: 1.4rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; z-index: 2100; }
+
         .nav-items { display: flex; gap: 40px; }
         .nav-items a { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
-        .nav-items a:hover { color: var(--accent-lime); }
+        .nav-items a:hover, .nav-items a.active { color: var(--accent-lime); }
 
-        /* --- CENTERED CONTACT PAGE STYLES --- */
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; z-index: 2100; }
+
+        /* --- CONTACT PAGE STYLES --- */
         .contact-page {
-            padding: 100px 20px;
+            padding: clamp(40px, 10vh, 100px) 20px;
             position: relative;
-            min-height: 100vh;
+            min-height: calc(100vh - var(--nav-height));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -71,39 +77,33 @@
         }
 
         .contact-container {
-            max-width: 700px; /* Thinner container for centered look */
+            max-width: 700px;
             width: 100%;
         }
 
-        .contact-header {
-            margin-bottom: 50px;
-        }
+        .contact-header { margin-bottom: clamp(30px, 8vh, 50px); }
 
         .contact-header .subtitle {
             color: var(--accent-lime);
             text-transform: uppercase;
             font-weight: 800;
             letter-spacing: 2px;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .contact-header h2 {
             font-family: var(--font-display);
-            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-size: clamp(2.2rem, 8vw, 4rem);
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.1;
             margin-top: 10px;
         }
 
-        .contact-header h2 span {
-            color: transparent;
-            -webkit-text-stroke: 1px white;
-        }
+        .contact-header h2 span { color: transparent; -webkit-text-stroke: 1px white; }
 
-        /* Centered Info Card */
         .contact-info-card {
             background: #141414;
-            padding: 50px 40px;
+            padding: clamp(30px, 5vw, 60px) clamp(15px, 4vw, 40px);
             border-radius: 32px;
             border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
@@ -111,95 +111,69 @@
 
         .contact-info-card h3 {
             font-family: var(--font-display);
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             margin-bottom: 10px;
         }
 
-        .direct-contact {
-            margin: 40px 0;
-        }
+        .direct-contact { margin: clamp(20px, 5vw, 40px) 0; }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 20px;
-            margin: 0 auto 20px auto;
+            gap: 15px;
+            margin: 0 auto 15px auto;
             padding: 15px;
-            border-radius: 15px;
+            border-radius: 18px;
             transition: 0.3s;
             cursor: pointer;
-            position: relative;
             text-align: left;
-            max-width: 400px; /* Keeps individual items clean */
+            max-width: 450px;
+            background: rgba(255,255,255,0.02);
         }
 
-        .contact-item:hover { background: rgba(255,255,255,0.03); }
+        .contact-item:hover { background: rgba(255,255,255,0.06); }
 
         .icon-box {
-            width: 55px;
-            height: 55px;
+            width: 50px; height: 50px;
             background: var(--accent-purple);
             border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; flex-shrink: 0;
         }
 
-        .contact-item span {
-            display: block;
-            font-size: 0.75rem;
-            color: #888;
-            text-transform: uppercase;
-            font-weight: 700;
-            margin-bottom: 4px;
+        .contact-item span.label {
+            display: block; font-size: 0.7rem; color: #888;
+            text-transform: uppercase; font-weight: 700; margin-bottom: 2px;
         }
 
-        .contact-item p { font-weight: 600; font-size: 1.1rem; }
+        .contact-item p { font-weight: 600; font-size: clamp(0.9rem, 3vw, 1.1rem); word-break: break-all; }
 
         #copy-toast {
-            position: absolute;
-            right: 20px;
-            font-size: 0.7rem;
-            color: var(--accent-lime);
+            margin-left: auto; font-size: 0.65rem;
+            color: var(--accent-lime); font-weight: 800;
             text-transform: uppercase;
-            font-weight: 800;
         }
 
-        /* Modern Centered WhatsApp Button */
         .wa-btn {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            padding: 22px 30px;
-            border-radius: 50px;
-            background: #25D366;
-            color: white;
-            font-family: var(--font-display);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            margin-top: 20px;
-            width: 100%;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
+            display: flex; justify-content: center; align-items: center;
+            gap: 12px; padding: 20px 30px; border-radius: 50px;
+            background: #25D366; color: white;
+            font-family: var(--font-display); font-weight: 800;
+            text-transform: uppercase; transition: 0.4s;
+            width: 100%; max-width: 450px; margin: 20px auto 0;
         }
 
-        .wa-btn:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3);
-            filter: brightness(1.1);
-        }
+        .wa-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
 
-        @media (max-width: 768px) {
-            nav { padding: 20px; }
-            .contact-page { padding: 80px 20px; }
-            .contact-info-card { padding: 40px 20px; }
-            .nav-items { display: none; }
+        /* --- MOBILE NAV OVERLAY --- */
+        @media (max-width: 850px) {
+            .menu-toggle { display: block; }
+            .nav-items {
+                position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+                background: #0d0d0d; flex-direction: column; justify-content: center;
+                align-items: center; transition: 0.4s;
+            }
+            .nav-items.active { right: 0; }
         }
     </style>
 </head>
@@ -210,17 +184,17 @@
 
     <nav>
         <div class="logo">xinnoxCreatives</div>
-        <div class="nav-items">
+        <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
+        <div class="nav-items" id="nav-list">
             <a href="index.html">Home</a>
             <a href="portfolio.html">Portfolio</a>
             <a href="about.html">About</a>
-            <a href="contact.html">Contact</a>
+            <a href="contact.html" class="active">Contact</a>
         </div>
     </nav>
 
-    <section class="contact-page" id="contact-page">
+    <section class="contact-page">
         <div class="bg-blob blob-3"></div>
-        
         <div class="contact-container">
             <div class="contact-header">
                 <span class="subtitle">Get in touch</span>
@@ -229,29 +203,29 @@
 
             <div class="contact-info-card">
                 <h3>Contact Details</h3>
-                <p>Ready to start a project? I'm just a message away.</p>
+                <p style="color: #aaa; margin-bottom: 20px;">Ready to start a project? I'm just a message away.</p>
                 
                 <div class="direct-contact">
                     <div class="contact-item" onclick="copyEmail()">
                         <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
                         <div>
-                            <span>Email Me</span>
+                            <span class="label">Email Me</span>
                             <p id="email-text">patpaulpatrig@gmail.com</p>
                         </div>
-                        <span id="copy-toast">Click to Copy</span>
+                        <span id="copy-toast">Copy</span>
                     </div>
                     
                     <div class="contact-item">
                         <div class="icon-box"><i class="fa-solid fa-location-dot"></i></div>
                         <div>
-                            <span>Based in</span>
+                            <span class="label">Based in</span>
                             <p>Accra, Ghana</p>
                         </div>
                     </div>
                 </div>
 
                 <a href="https://wa.me/233544748171" class="wa-btn" target="_blank">
-                    <i class="fa-brands fa-whatsapp" style="font-size: 1.6rem;"></i>
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.5rem;"></i>
                     <span>Message on WhatsApp</span>
                 </a>
             </div>
@@ -259,17 +233,25 @@
     </section>
 
     <script>
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        const menuIcon = menuToggle.querySelector('i');
+
+        menuToggle.addEventListener('click', () => {
+            navList.classList.toggle('active');
+            menuIcon.classList.toggle('fa-bars');
+            menuIcon.classList.toggle('fa-xmark');
+            document.body.style.overflow = navList.classList.contains('active') ? 'hidden' : 'auto';
+        });
+
+        // Copy Email Logic
         function copyEmail() {
             const email = document.getElementById('email-text').innerText;
             const toast = document.getElementById('copy-toast');
-            
             navigator.clipboard.writeText(email).then(() => {
                 toast.innerText = "Copied!";
-                toast.style.color = "#D9F248";
-                setTimeout(() => {
-                    toast.innerText = "Click to Copy";
-                    toast.style.color = "#888";
-                }, 2000);
+                setTimeout(() => { toast.innerText = "Copy"; }, 2000);
             });
         }
     </script>
