@@ -40,11 +40,11 @@
         /* --- BACKGROUND GRADIENT BLOBS --- */
         .bg-blob {
             position: absolute; border-radius: 50%; filter: blur(60px);
-            z-index: -1; opacity: 0.3; animation: float 10s infinite alternate;
+            z-index: -1; opacity: 0.2; animation: float 10s infinite alternate;
         }
         .blob-1 { width: clamp(200px, 40vw, 400px); height: clamp(200px, 40vw, 400px); background: var(--accent-purple); top: -50px; left: -50px; }
         .blob-2 { width: 300px; height: 300px; background: var(--accent-orange); bottom: 10%; right: -50px; }
-        .blob-3 { width: 350px; height: 350px; background: var(--accent-purple); top: 20%; right: 10%; opacity: 0.15; }
+        .blob-3 { width: 350px; height: 350px; background: var(--accent-purple); top: 20%; right: 10%; opacity: 0.1; }
         
         @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(25px, 40px); } }
 
@@ -56,97 +56,75 @@
             align-items: center; font-family: var(--font-display);
             position: sticky; top: 0; background: rgba(13,13,13,0.8); 
             backdrop-filter: blur(15px); z-index: 2000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-size: 1.4rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; z-index: 2100; }
+        .logo { font-size: 1.3rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; z-index: 2100; }
 
         .nav-items { display: flex; gap: 40px; }
         .nav-items a { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
         .nav-items a:hover, .nav-items a.active { color: var(--accent-lime); }
 
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; z-index: 2100; }
+        .menu-toggle {
+            display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 2100;
+        }
+        .menu-toggle span { width: 28px; height: 2px; background: white; transition: 0.4s; }
 
         /* --- CONTACT PAGE STYLES --- */
         .contact-page {
-            padding: clamp(40px, 10vh, 100px) 20px;
+            padding: clamp(60px, 12vh, 120px) 20px;
             position: relative;
             min-height: calc(100vh - var(--nav-height));
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             text-align: center;
         }
 
-        .contact-container {
-            max-width: 700px;
-            width: 100%;
-        }
+        .contact-container { max-width: 700px; width: 100%; }
 
-        .contact-header { margin-bottom: clamp(30px, 8vh, 50px); }
-
+        .contact-header { margin-bottom: 40px; }
         .contact-header .subtitle {
-            color: var(--accent-lime);
-            text-transform: uppercase;
-            font-weight: 800;
-            letter-spacing: 2px;
-            font-size: 0.85rem;
+            color: var(--accent-lime); text-transform: uppercase;
+            font-weight: 800; letter-spacing: 2px; font-size: 0.8rem;
         }
-
         .contact-header h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2.2rem, 8vw, 4rem);
-            text-transform: uppercase;
-            line-height: 1.1;
-            margin-top: 10px;
+            font-family: var(--font-display); font-size: clamp(2.2rem, 8vw, 4rem);
+            text-transform: uppercase; line-height: 1; margin-top: 10px;
         }
-
         .contact-header h2 span { color: transparent; -webkit-text-stroke: 1px white; }
 
         .contact-info-card {
             background: #141414;
-            padding: clamp(30px, 5vw, 60px) clamp(15px, 4vw, 40px);
+            padding: clamp(30px, 6vw, 60px) clamp(20px, 4vw, 40px);
             border-radius: 32px;
             border: 1px solid rgba(255,255,255,0.05);
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        .contact-info-card h3 {
-            font-family: var(--font-display);
-            font-size: clamp(1.5rem, 4vw, 2rem);
-            margin-bottom: 10px;
-        }
-
-        .direct-contact { margin: clamp(20px, 5vw, 40px) 0; }
+        .direct-contact { margin: 30px 0; }
 
         .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 0 auto 15px auto;
-            padding: 15px;
-            border-radius: 18px;
-            transition: 0.3s;
-            cursor: pointer;
-            text-align: left;
-            max-width: 450px;
+            display: flex; align-items: center; gap: 15px;
+            margin: 0 auto 15px auto; padding: 18px;
+            border-radius: 18px; transition: 0.3s; cursor: pointer;
+            text-align: left; max-width: 480px;
             background: rgba(255,255,255,0.02);
+            border: 1px solid transparent;
+        }
+        .contact-item:hover { 
+            background: rgba(255,255,255,0.05); 
+            border-color: rgba(255,255,255,0.1);
         }
 
-        .contact-item:hover { background: rgba(255,255,255,0.06); }
-
         .icon-box {
-            width: 50px; height: 50px;
-            background: var(--accent-purple);
-            border-radius: 12px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2rem; flex-shrink: 0;
+            width: 45px; height: 45px; background: var(--accent-purple);
+            border-radius: 12px; display: flex; align-items: center;
+            justify-content: center; font-size: 1.1rem; flex-shrink: 0;
         }
 
         .contact-item span.label {
-            display: block; font-size: 0.7rem; color: #888;
-            text-transform: uppercase; font-weight: 700; margin-bottom: 2px;
+            display: block; font-size: 0.65rem; color: #888;
+            text-transform: uppercase; font-weight: 700;
         }
-
-        .contact-item p { font-weight: 600; font-size: clamp(0.9rem, 3vw, 1.1rem); word-break: break-all; }
+        .contact-item p { font-weight: 600; font-size: 1rem; }
 
         #copy-toast {
             margin-left: auto; font-size: 0.65rem;
@@ -160,21 +138,28 @@
             background: #25D366; color: white;
             font-family: var(--font-display); font-weight: 800;
             text-transform: uppercase; transition: 0.4s;
-            width: 100%; max-width: 450px; margin: 20px auto 0;
+            width: 100%; max-width: 480px; margin: 25px auto 0;
         }
-
-        .wa-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2); }
+        .wa-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.3); }
 
         /* --- MOBILE NAV OVERLAY --- */
         @media (max-width: 850px) {
-            .menu-toggle { display: block; }
+            .menu-toggle { display: flex; }
             .nav-items {
                 position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
                 background: #0d0d0d; flex-direction: column; justify-content: center;
-                align-items: center; transition: 0.4s;
+                align-items: center; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                gap: 35px;
             }
             .nav-items.active { right: 0; }
+            .nav-items a { font-size: 1.5rem; }
+
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -7px); }
         }
+
+        footer { padding: 40px 20px; text-align: center; color: #444; font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
 <body>
@@ -184,7 +169,11 @@
 
     <nav>
         <div class="logo">xinnoxCreatives</div>
-        <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="nav-items" id="nav-list">
             <a href="index.html">Home</a>
             <a href="portfolio.html">Portfolio</a>
@@ -202,8 +191,7 @@
             </div>
 
             <div class="contact-info-card">
-                <h3>Contact Details</h3>
-                <p style="color: #aaa; margin-bottom: 20px;">Ready to start a project? I'm just a message away.</p>
+                <p style="color: #aaa; margin-bottom: 25px;">Ready to start a project? I'm just a message away.</p>
                 
                 <div class="direct-contact">
                     <div class="contact-item" onclick="copyEmail()">
@@ -232,20 +220,28 @@
         </div>
     </section>
 
+    <footer>
+        <p>&copy; 2026 xinnoxCreatives. All Rights Reserved.</p>
+    </footer>
+
     <script>
-        // Mobile Menu Logic
         const menuToggle = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-        const menuIcon = menuToggle.querySelector('i');
 
         menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
             navList.classList.toggle('active');
-            menuIcon.classList.toggle('fa-bars');
-            menuIcon.classList.toggle('fa-xmark');
             document.body.style.overflow = navList.classList.contains('active') ? 'hidden' : 'auto';
         });
 
-        // Copy Email Logic
+        document.querySelectorAll('.nav-items a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navList.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
         function copyEmail() {
             const email = document.getElementById('email-text').innerText;
             const toast = document.getElementById('copy-toast');

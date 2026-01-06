@@ -35,14 +35,17 @@
         @keyframes float { 0% { transform: translate(0, 0); } 100% { transform: translate(20px, 30px); } }
 
         /* Navigation */
-        nav { height: var(--nav-height); padding: 0 clamp(20px, 5vw, 60px); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); position: sticky; top: 0; background: rgba(13,13,13,0.8); backdrop-filter: blur(15px); z-index: 2000; }
+        nav { height: var(--nav-height); padding: 0 clamp(20px, 5vw, 60px); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-display); position: sticky; top: 0; background: rgba(13,13,13,0.8); backdrop-filter: blur(15px); z-index: 2000; border-bottom: 1px solid rgba(255,255,255,0.05); }
         .logo { font-size: 1.3rem; font-weight: 800; text-transform: uppercase; z-index: 2100; }
+        
         .nav-items { display: flex; gap: 30px; }
         .nav-items a { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
         .nav-items a:hover, .nav-items a.active { color: var(--accent-lime); }
-        .menu-toggle { display: none; cursor: pointer; z-index: 2100; font-size: 1.5rem; }
 
-        /* Portfolio */
+        .menu-toggle { display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 2100; }
+        .menu-toggle span { width: 28px; height: 2px; background: white; transition: 0.4s; }
+
+        /* Portfolio Grid */
         .portfolio { padding: 40px clamp(20px, 5vw, 60px); min-height: 80vh; }
         .section-header { margin-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-end; }
         .section-header h2 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.5rem); text-transform: uppercase; }
@@ -51,12 +54,14 @@
         .filter-btn { background: #1a1a1a; color: white; border: 1px solid #333; padding: 10px 25px; border-radius: 30px; cursor: pointer; font-family: var(--font-display); font-size: 0.75rem; text-transform: uppercase; font-weight: 700; transition: 0.3s; }
         .filter-btn.active { background: var(--accent-lime); color: black; border-color: var(--accent-lime); }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 400px), 1fr)); gap: 30px; }
+        /* Mobile Optimized Grid */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 25px; }
         .card { background-color: #141414; border-radius: 15px; overflow: hidden; transition: 0.4s ease; cursor: pointer; border: 1px solid rgba(255,255,255,0.05); }
         .card:hover { transform: translateY(-8px); border-color: var(--accent-lime); }
         .card-img { aspect-ratio: 1/1; width: 100%; background-size: cover; background-position: center; }
-        .card-info { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-        .tag { border: 1px solid #444; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; color: var(--accent-lime); text-transform: uppercase; }
+        .card-info { padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+        .card-info h3 { font-size: 0.9rem; }
+        .tag { border: 1px solid #444; padding: 4px 10px; border-radius: 20px; font-size: 0.65rem; color: var(--accent-lime); text-transform: uppercase; }
 
         /* Lightbox */
         .lightbox { display: none; position: fixed; z-index: 3000; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); justify-content: center; align-items: center; padding: 20px; }
@@ -64,9 +69,14 @@
         .close-lightbox { position: absolute; top: 20px; right: 25px; color: white; font-size: 35px; cursor: pointer; }
 
         @media (max-width: 850px) {
-            .menu-toggle { display: block; }
-            .nav-items { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: #0d0d0d; flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; }
+            .menu-toggle { display: flex; }
+            .nav-items { position: fixed; top: 0; right: -100%; width: 100%; height: 100vh; background: #0d0d0d; flex-direction: column; justify-content: center; align-items: center; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0); gap: 35px; }
             .nav-items.active { right: 0; }
+            .nav-items a { font-size: 1.5rem; }
+            
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -7px); }
         }
     </style>
 </head>
@@ -77,7 +87,11 @@
 
     <nav>
         <div class="logo">xinnoxCreatives</div>
-        <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="nav-items" id="nav-list">
             <a href="index.html">Home</a>
             <a href="portfolio.html" class="active">Portfolio</a>
@@ -106,25 +120,28 @@
         <img src="" id="lightbox-img">
     </div>
 
+    <footer>
+        <p style="padding: 40px; text-align: center; color: #444; font-size: 0.8rem;">&copy; 2026 xinnoxCreatives. All Rights Reserved.</p>
+    </footer>
+
     <script>
-        // MOBILE MENU LOGIC
         const menuToggle = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-        menuToggle.onclick = () => {
-            navList.classList.toggle('active');
-            menuToggle.querySelector('i').classList.toggle('fa-bars');
-            menuToggle.querySelector('i').classList.toggle('fa-xmark');
-        };
-
-        // PORTFOLIO LOGIC
         const grid = document.getElementById('auto-portfolio-grid');
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
 
+        // Mobile Menu
+        menuToggle.onclick = () => {
+            menuToggle.classList.toggle('active');
+            navList.classList.toggle('active');
+            document.body.style.overflow = navList.classList.contains('active') ? 'hidden' : 'auto';
+        };
+
         const portfolioData = {
-            packaging: { folder: 'packaging', count: 7, label: 'Packaging' }, 
-            flyers: { folder: 'flyers', count: 15, label: 'Flyers' }, // Adjust counts as needed
-            social: { folder: 'social', count: 10, label: 'Social Media' }
+            packaging: { folder: 'packaging', count: 10, label: 'Packaging' }, 
+            flyers: { folder: 'flyers', count: 20, label: 'Flyers' }, 
+            social: { folder: 'social', count: 15, label: 'Social Media' }
         };
 
         function renderGrid(category) {
@@ -133,25 +150,27 @@
 
             for (let i = 1; i <= config.count; i++) {
                 const fileName = i < 10 ? '0' + i : i;
-                const base = `img/${config.folder}/${fileName}`;
+                // Check all common extensions
+                const extensions = ['jpg', 'png', 'JPG', 'PNG', 'jpeg', 'JPEG'];
                 
-                // This checks JPG then PNG
-                checkImageExists(`${base}.jpg`, config.label, fileName, () => {
-                    checkImageExists(`${base}.png`, config.label, fileName);
+                extensions.forEach(ext => {
+                    const url = `img/${config.folder}/${fileName}.${ext}`;
+                    const img = new Image();
+                    img.src = url;
+                    img.onload = () => {
+                        // Avoid duplicates if both .jpg and .png exist
+                        if (!document.querySelector(`[data-id="${category}-${fileName}"]`)) {
+                            createCard(url, config.label, fileName, category);
+                        }
+                    };
                 });
             }
         }
 
-        function checkImageExists(url, label, num, fallback) {
-            const img = new Image();
-            img.onload = () => createCard(url, label, num);
-            img.onerror = () => { if(fallback) fallback(); };
-            img.src = url;
-        }
-
-        function createCard(url, label, num) {
+        function createCard(url, label, num, category) {
             const card = document.createElement('div');
             card.className = 'card';
+            card.setAttribute('data-id', `${category}-${num}`);
             card.innerHTML = `
                 <div class="card-img" style="background-image: url('${url}')"></div>
                 <div class="card-info">
@@ -172,13 +191,8 @@
             renderGrid(category);
         }
 
-        // Initialize
         window.onload = () => renderGrid('packaging');
         lightbox.onclick = () => lightbox.style.display = 'none';
     </script>
-
-    <footer>
-        <p style="padding: 40px; text-align: center; color: #444; font-size: 0.8rem;">&copy; 2026 xinnoxCreatives.</p>
-    </footer>
 </body>
 </html>

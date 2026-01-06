@@ -40,7 +40,7 @@
         /* --- BACKGROUND BLOBS --- */
         .bg-blob {
             position: absolute; border-radius: 50%; filter: blur(80px);
-            z-index: -1; opacity: 0.3; animation: float 10s infinite alternate;
+            z-index: -1; opacity: 0.2; animation: float 10s infinite alternate;
         }
         .blob-1 { width: clamp(200px, 40vw, 400px); height: clamp(200px, 40vw, 400px); background: var(--accent-purple); top: -50px; left: -50px; }
         .blob-2 { width: 300px; height: 300px; background: var(--accent-orange); bottom: 10%; right: -50px; }
@@ -54,59 +54,69 @@
             align-items: center; font-family: var(--font-display);
             position: sticky; top: 0; background: rgba(13,13,13,0.8); 
             backdrop-filter: blur(15px); z-index: 2000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-size: 1.4rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; z-index: 2100; }
+        .logo { font-size: 1.3rem; font-weight: 800; text-transform: uppercase; letter-spacing: -1px; z-index: 2100; }
 
         .nav-items { display: flex; gap: 40px; }
         .nav-items a { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; }
         .nav-items a:hover, .nav-items a.active { color: var(--accent-lime); }
 
-        /* Mobile Menu Toggle */
-        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; z-index: 2100; }
+        .menu-toggle {
+            display: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 2100;
+        }
+        .menu-toggle span { width: 28px; height: 2px; background: white; transition: 0.4s; }
 
         /* --- ABOUT SECTION --- */
         .about-section { 
-            padding: clamp(60px, 10vh, 120px) clamp(20px, 5vw, 60px); 
+            padding: clamp(40px, 8vh, 100px) clamp(20px, 5vw, 60px); 
             display: flex; gap: clamp(30px, 5vw, 80px); 
-            align-items: center; min-height: 90vh;
+            align-items: center; min-height: 85vh;
+            max-width: 1400px; margin: 0 auto;
         }
         
         .about-img { 
             flex: 1; border-radius: 24px; overflow: hidden; 
-            height: clamp(350px, 60vh, 600px);
+            height: clamp(300px, 50vh, 550px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
         }
         .about-img img { width: 100%; height: 100%; object-fit: cover; }
 
         .about-content { flex: 1.2; }
         .about-content h2 { 
             font-family: var(--font-display); 
-            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            font-size: clamp(2.2rem, 6vw, 4.5rem); 
             margin-bottom: 25px; text-transform: uppercase; line-height: 1;
         }
         .about-content p { 
-            font-size: clamp(1rem, 2vw, 1.15rem); 
+            font-size: clamp(0.95rem, 2vw, 1.1rem); 
             color: #ccc; margin-bottom: 20px; 
         }
         .about-content strong { color: var(--accent-lime); }
 
-        /* --- MOBILE OPTIMIZATIONS --- */
+        /* --- MOBILE OVERLAY --- */
         @media (max-width: 900px) {
-            .about-section { flex-direction: column; text-align: center; }
-            .about-img { width: 100%; max-width: 500px; }
+            .about-section { flex-direction: column; text-align: center; padding-top: 40px; }
+            .about-img { width: 100%; max-width: 400px; height: 400px; }
             
-            /* Mobile Nav Overlay */
-            .menu-toggle { display: block; }
+            .menu-toggle { display: flex; }
             .nav-items {
                 position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
                 background: #0d0d0d; flex-direction: column; justify-content: center;
-                align-items: center; transition: 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
+                align-items: center; transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+                gap: 35px;
             }
             .nav-items.active { right: 0; }
+            .nav-items a { font-size: 1.5rem; }
+
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -7px); }
         }
 
         footer { 
-            padding: 40px 20px; text-align: center; color: #555; 
+            padding: 40px 20px; text-align: center; color: #444; font-size: 0.8rem;
             border-top: 1px solid rgba(255,255,255,0.05); 
         }
     </style>
@@ -120,7 +130,9 @@
         <div class="logo">xinnoxCreatives</div>
         
         <div class="menu-toggle" id="mobile-menu">
-            <i class="fa-solid fa-bars"></i>
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
 
         <div class="nav-items" id="nav-list">
@@ -140,13 +152,12 @@
             <p>
                 I am <strong>Patrick Paul</strong>, the creative lead at <strong>xinnoxCreatives</strong>. 
                 With over 2 years of experience in the design industry, I specialize in high-impact visual 
-                storytelling and modern brand aesthetics that help businesses stand out in a crowded digital landscape.
+                storytelling and modern brand aesthetics.
             </p>
             <p>
                 My approach blends strategic thinking with artistic intuition. Whether it’s crafting a 
                 unique <strong>brand identity</strong>, designing high-conversion <strong>flyers</strong>, 
-                or developing premium <strong>packaging</strong>, I focus on creating designs that don’t 
-                just look good—they work.
+                or developing premium <strong>packaging</strong>, I focus on results.
             </p>
             <p>
                 I believe that every brand has a story to tell. My mission is to translate that story 
@@ -162,26 +173,17 @@
     <script>
         const menuToggle = document.getElementById('mobile-menu');
         const navList = document.getElementById('nav-list');
-        const menuIcon = menuToggle.querySelector('i');
 
         menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
             navList.classList.toggle('active');
-            
-            // Toggle icon between bars and X
-            if (navList.classList.contains('active')) {
-                menuIcon.classList.replace('fa-bars', 'fa-xmark');
-                document.body.style.overflow = 'hidden'; // Stop background scroll
-            } else {
-                menuIcon.classList.replace('fa-xmark', 'fa-bars');
-                document.body.style.overflow = 'auto';
-            }
+            document.body.style.overflow = navList.classList.contains('active') ? 'hidden' : 'auto';
         });
 
-        // Close menu when a link is clicked
         document.querySelectorAll('.nav-items a').forEach(link => {
             link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
                 navList.classList.remove('active');
-                menuIcon.classList.replace('fa-xmark', 'fa-bars');
                 document.body.style.overflow = 'auto';
             });
         });
